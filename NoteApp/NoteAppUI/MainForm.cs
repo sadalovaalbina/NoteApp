@@ -11,6 +11,7 @@ using NoteApp;
 
 namespace NoteAppUI
 { //Проверка №1
+    // Проверка №2
     public partial class MainForm : Form
     {
         public MainForm()
