@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using NoteApp;
 
 namespace NoteAppUI
-{
+{ //Проверка №1
     public partial class MainForm : Form
     {
         public MainForm()
