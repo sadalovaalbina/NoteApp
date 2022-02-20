@@ -6,9 +6,14 @@ using System.Threading.Tasks;
 
 namespace NoteApp
 {
-
-    class Project
+    /// <summary>
+    /// Класс проекта
+    /// </summary>
+    public class Project
     {
+        /// <summary>
+        /// Свойство, хранящее список заметок
+        /// </summary>
         public List<Note> Notes { get; set; } = new List<Note>();
     }
 }

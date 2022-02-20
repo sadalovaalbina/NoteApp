@@ -6,13 +6,40 @@ using System.Threading.Tasks;
 
 namespace NoteApp
 {
+    /// <summary>
+    /// Хранит название, категорию и текст заметки,
+    /// время ее создания, время последнего изменения
+    /// </summary>
     public class Note : ICloneable
     {
+        /// <summary>
+        /// Название заметки
+        /// </summary>
         private string _name = "Без названия";
+
+        /// <summary>
+        /// Категория заметки
+        /// </summary>
         private NoteCategory _noteCategory;
+
+        /// <summary>
+        /// Текст заметки
+        /// </summary>
         private string _noteText;
+
+        /// <summary>
+        /// Время создания заметки
+        /// </summary>
         private DateTime _createTime = DateTime.Now;
+
+        /// <summary>
+        /// Время последнего изменения заметки
+        /// </summary>
         private DateTime _lastChange;
+
+        /// <summary>
+        /// Возвращает или устанавливает значение "Название заметки"
+        /// </summary>
         public string Name
         {
             get
@@ -29,6 +56,10 @@ namespace NoteApp
                 LastChange = DateTime.Now;
             }
         }
+
+        /// <summary>
+        /// Возвращает или устанавливает значение "Категория заметки"
+        /// </summary>
         public NoteCategory NoteCategory
         {
             get
@@ -41,6 +72,10 @@ namespace NoteApp
                 LastChange = DateTime.Now;
             }
         }
+
+        /// <summary>
+        /// Возвращает или устанавливает значение "Текст заметки"
+        /// </summary>
         public string NoteText
         {
             get
@@ -53,6 +88,10 @@ namespace NoteApp
                 LastChange = DateTime.Now;
             }
         }
+
+        /// <summary>
+        /// Возвращает или устанавливает значение "Время создания заметки"
+        /// </summary>
         public DateTime CreateTime
         {
             get
@@ -60,6 +99,10 @@ namespace NoteApp
                 return _createTime;
             }
         }
+
+        /// <summary>
+        /// Возвращает или устанавливает значение "Время изменения"
+        /// </summary>
         public DateTime LastChange
         {
             get
@@ -71,14 +114,15 @@ namespace NoteApp
                 _lastChange = value;
             }
         }
+
         /// <summary>
-        /// 
+        /// Конструктор класса Note для сериализации
         /// </summary>
-        /// <param name="name"></param>
-        /// <param name="noteCategory"></param>
-        /// <param name="noteText"></param>
-        /// <param name="createTime"></param>
-        /// <param name="lastChange"></param>
+        /// <param name="name"> </param> //написать значеняи параметров
+        /// <param name="noteCategory"> </param>
+        /// <param name="noteText"> </param>
+        /// <param name="createTime"> </param>
+        /// <param name="lastChange"> </param>
         private Note(string name, NoteCategory noteCategory, string noteText, DateTime createTime, DateTime lastChange)
         {
             _name = name;
@@ -87,6 +131,11 @@ namespace NoteApp
             _createTime = createTime;
             _lastChange = lastChange;
         }
+
+        /// <summary>
+        /// Возвращает клон объекта
+        /// </summary>
+        /// <returns></returns>
         public object Clone()
         {
             return new Note(_name, _noteCategory, _noteText, _createTime, _lastChange);

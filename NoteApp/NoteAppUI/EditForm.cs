@@ -10,16 +10,11 @@ using System.Windows.Forms;
 
 namespace NoteAppUI
 {
-    public partial class MainForm : Form
+    public partial class EditForm : Form
     {
-        public MainForm()
+        public EditForm()
         {
             InitializeComponent();
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }
