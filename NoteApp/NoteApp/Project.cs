@@ -15,5 +15,29 @@ namespace NoteApp
         /// Свойство, хранящее список заметок
         /// </summary>
         public List<Note> Notes { get; set; } = new List<Note>();
+
+        public Project SearchByCategory(string category, Project project)
+        {
+            if(category == "")
+            {
+                return project;
+            }
+
+            var newProject = new Project();
+
+            if(project == null)
+            {
+                return newProject;
+            }
+
+            for(int index = 0; index < project.Notes.Count(); index++)
+            {
+                if(project.Notes[index].NoteCategory.ToString() == category)
+                {
+                    newProject.Notes.Add(project.Notes[index]);
+                }
+            }
+            return newProject;
+        }
     }
 }

@@ -116,6 +116,14 @@ namespace NoteApp
         }
 
         /// <summary>
+        /// Пустой конструктор
+        /// </summary>
+        public Note()
+        {
+
+        }
+
+        /// <summary>
         /// Конструктор класса Note для сериализации
         /// </summary>
         /// <param name="name"> </param> //написать значеняи параметров
