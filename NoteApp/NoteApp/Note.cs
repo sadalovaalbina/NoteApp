@@ -10,7 +10,7 @@ namespace NoteApp
     /// Хранит название, категорию и текст заметки,
     /// время ее создания, время последнего изменения
     /// </summary>
-    public class Note : ICloneable
+    public class Note : ICloneable, IEquatable<Note>
     {
         /// <summary>
         /// Название заметки
@@ -94,6 +94,10 @@ namespace NoteApp
         /// </summary>
         public DateTime CreateTime
         {
+            set
+            {
+                _createTime = value;
+            }
             get
             {
                 return _createTime;
@@ -109,7 +113,7 @@ namespace NoteApp
             {
                 return _lastChange;
             }
-            private set
+            set
             {
                 _lastChange = value;
             }
@@ -147,6 +151,24 @@ namespace NoteApp
         public object Clone()
         {
             return new Note(_name, _noteCategory, _noteText, _createTime, _lastChange);
+        }
+
+        /// <summary>
+        /// Возвращает результат сравнения двух заметок
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
+        public bool Equals(Note other)
+        {
+            if (ReferenceEquals(null, other)) return false;
+
+            if (ReferenceEquals(this, other)) return true;
+
+            return _name == other._name
+                   && _noteCategory == other._noteCategory
+                   && _noteText == other._noteText
+                   && _createTime.Equals(other._createTime)
+                   && _lastChange.Equals(other._lastChange);
         }
     }
 }

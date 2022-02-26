@@ -39,5 +39,17 @@ namespace NoteApp
             }
             return newProject;
         }
+
+        public int IndexOf(Note note, List<Note> list)
+        {
+            for(int index = 0; index < list.Count; index++)
+            {
+                if(note.Equals(list[index]))
+                {
+                    return index;
+                }
+            }
+            return -1;
+        }
     }
 }

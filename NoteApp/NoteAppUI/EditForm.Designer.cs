@@ -51,12 +51,11 @@ namespace NoteAppUI
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.Location = new System.Drawing.Point(9, 15);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label1.MaximumSize = new System.Drawing.Size(69, 17);
-            this.label1.MinimumSize = new System.Drawing.Size(69, 17);
+            this.label1.Location = new System.Drawing.Point(12, 18);
+            this.label1.MaximumSize = new System.Drawing.Size(92, 21);
+            this.label1.MinimumSize = new System.Drawing.Size(92, 21);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(69, 17);
+            this.label1.Size = new System.Drawing.Size(92, 21);
             this.label1.TabIndex = 0;
             this.label1.Text = "Title:";
             // 
@@ -64,7 +63,8 @@ namespace NoteAppUI
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label2.Location = new System.Drawing.Point(9, 43);
+            this.label2.Location = new System.Drawing.Point(12, 53);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(69, 17);
             this.label2.TabIndex = 1;
@@ -74,11 +74,12 @@ namespace NoteAppUI
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label3.Location = new System.Drawing.Point(9, 73);
-            this.label3.MaximumSize = new System.Drawing.Size(69, 17);
-            this.label3.MinimumSize = new System.Drawing.Size(69, 17);
+            this.label3.Location = new System.Drawing.Point(12, 90);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.MaximumSize = new System.Drawing.Size(92, 21);
+            this.label3.MinimumSize = new System.Drawing.Size(92, 21);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(69, 17);
+            this.label3.Size = new System.Drawing.Size(92, 21);
             this.label3.TabIndex = 2;
             this.label3.Text = "Created:";
             // 
@@ -86,64 +87,74 @@ namespace NoteAppUI
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label4.Location = new System.Drawing.Point(262, 73);
-            this.label4.MaximumSize = new System.Drawing.Size(69, 17);
-            this.label4.MinimumSize = new System.Drawing.Size(69, 17);
+            this.label4.Location = new System.Drawing.Point(349, 90);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label4.MaximumSize = new System.Drawing.Size(92, 21);
+            this.label4.MinimumSize = new System.Drawing.Size(92, 21);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(69, 17);
+            this.label4.Size = new System.Drawing.Size(92, 21);
             this.label4.TabIndex = 3;
             this.label4.Text = "Modified:";
             // 
             // textBoxTitle
             // 
             this.textBoxTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBoxTitle.Location = new System.Drawing.Point(84, 12);
-            this.textBoxTitle.MinimumSize = new System.Drawing.Size(521, 25);
+            this.textBoxTitle.Location = new System.Drawing.Point(112, 15);
+            this.textBoxTitle.Margin = new System.Windows.Forms.Padding(4);
+            this.textBoxTitle.MaximumSize = new System.Drawing.Size(771, 25);
+            this.textBoxTitle.MinimumSize = new System.Drawing.Size(771, 25);
             this.textBoxTitle.Name = "textBoxTitle";
-            this.textBoxTitle.Size = new System.Drawing.Size(579, 22);
+            this.textBoxTitle.Size = new System.Drawing.Size(771, 22);
             this.textBoxTitle.TabIndex = 4;
+            this.textBoxTitle.TextChanged += new System.EventHandler(this.textBoxTitle_TextChanged);
             // 
             // dateTimePickerCreated
             // 
             this.dateTimePickerCreated.Enabled = false;
             this.dateTimePickerCreated.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.dateTimePickerCreated.Location = new System.Drawing.Point(84, 67);
-            this.dateTimePickerCreated.MaximumSize = new System.Drawing.Size(150, 25);
-            this.dateTimePickerCreated.MinimumSize = new System.Drawing.Size(150, 25);
+            this.dateTimePickerCreated.Location = new System.Drawing.Point(112, 82);
+            this.dateTimePickerCreated.Margin = new System.Windows.Forms.Padding(4);
+            this.dateTimePickerCreated.MaximumSize = new System.Drawing.Size(199, 25);
+            this.dateTimePickerCreated.MinimumSize = new System.Drawing.Size(199, 25);
             this.dateTimePickerCreated.Name = "dateTimePickerCreated";
-            this.dateTimePickerCreated.Size = new System.Drawing.Size(150, 25);
+            this.dateTimePickerCreated.Size = new System.Drawing.Size(199, 25);
             this.dateTimePickerCreated.TabIndex = 5;
             // 
             // dateTimePickerModified
             // 
             this.dateTimePickerModified.Enabled = false;
             this.dateTimePickerModified.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.dateTimePickerModified.Location = new System.Drawing.Point(337, 67);
-            this.dateTimePickerModified.MaximumSize = new System.Drawing.Size(150, 25);
-            this.dateTimePickerModified.MinimumSize = new System.Drawing.Size(150, 25);
+            this.dateTimePickerModified.Location = new System.Drawing.Point(449, 82);
+            this.dateTimePickerModified.Margin = new System.Windows.Forms.Padding(4);
+            this.dateTimePickerModified.MaximumSize = new System.Drawing.Size(199, 25);
+            this.dateTimePickerModified.MinimumSize = new System.Drawing.Size(199, 25);
             this.dateTimePickerModified.Name = "dateTimePickerModified";
-            this.dateTimePickerModified.Size = new System.Drawing.Size(150, 25);
+            this.dateTimePickerModified.Size = new System.Drawing.Size(199, 25);
             this.dateTimePickerModified.TabIndex = 6;
             // 
             // buttonOk
             // 
             this.buttonOk.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonOk.Location = new System.Drawing.Point(506, 407);
+            this.buttonOk.Location = new System.Drawing.Point(675, 501);
+            this.buttonOk.Margin = new System.Windows.Forms.Padding(4);
             this.buttonOk.Name = "buttonOk";
-            this.buttonOk.Size = new System.Drawing.Size(75, 25);
+            this.buttonOk.Size = new System.Drawing.Size(100, 31);
             this.buttonOk.TabIndex = 8;
             this.buttonOk.Text = "OK";
             this.buttonOk.UseVisualStyleBackColor = true;
+            this.buttonOk.Click += new System.EventHandler(this.buttonOk_Click);
             // 
             // buttonCancel
             // 
             this.buttonCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonCancel.Location = new System.Drawing.Point(588, 407);
+            this.buttonCancel.Location = new System.Drawing.Point(784, 501);
+            this.buttonCancel.Margin = new System.Windows.Forms.Padding(4);
             this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.Size = new System.Drawing.Size(75, 25);
+            this.buttonCancel.Size = new System.Drawing.Size(100, 31);
             this.buttonCancel.TabIndex = 9;
             this.buttonCancel.Text = "Cancel";
             this.buttonCancel.UseVisualStyleBackColor = true;
+            this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
             // textBoxText
             // 
@@ -151,21 +162,33 @@ namespace NoteAppUI
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxText.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBoxText.Location = new System.Drawing.Point(12, 98);
-            this.textBoxText.MaximumSize = new System.Drawing.Size(1234, 1235);
+            this.textBoxText.Location = new System.Drawing.Point(16, 121);
+            this.textBoxText.Margin = new System.Windows.Forms.Padding(4);
+            this.textBoxText.MaximumSize = new System.Drawing.Size(1644, 1519);
             this.textBoxText.Multiline = true;
             this.textBoxText.Name = "textBoxText";
-            this.textBoxText.Size = new System.Drawing.Size(651, 303);
+            this.textBoxText.Size = new System.Drawing.Size(867, 372);
             this.textBoxText.TabIndex = 10;
+            this.textBoxText.TextChanged += new System.EventHandler(this.textBoxText_TextChanged);
             // 
             // comboBox
             // 
             this.comboBox.DataBindings.Add(new System.Windows.Forms.Binding("SelectedValue", this.noteBindingSource, "NoteCategory", true));
             this.comboBox.FormattingEnabled = true;
-            this.comboBox.Location = new System.Drawing.Point(84, 40);
+            this.comboBox.Items.AddRange(new object[] {
+            "Work",
+            "Home",
+            "HealthAndSport",
+            "People",
+            "Docs",
+            "Finance",
+            "Other"});
+            this.comboBox.Location = new System.Drawing.Point(112, 49);
+            this.comboBox.Margin = new System.Windows.Forms.Padding(4);
             this.comboBox.Name = "comboBox";
-            this.comboBox.Size = new System.Drawing.Size(150, 21);
+            this.comboBox.Size = new System.Drawing.Size(199, 24);
             this.comboBox.TabIndex = 11;
+            this.comboBox.SelectedIndexChanged += new System.EventHandler(this.comboBox_SelectedIndexChanged);
             // 
             // noteBindingSource
             // 
@@ -177,9 +200,9 @@ namespace NoteAppUI
             // 
             // EditForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(675, 444);
+            this.ClientSize = new System.Drawing.Size(900, 546);
             this.Controls.Add(this.comboBox);
             this.Controls.Add(this.textBoxText);
             this.Controls.Add(this.buttonCancel);
@@ -191,11 +214,11 @@ namespace NoteAppUI
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Margin = new System.Windows.Forms.Padding(2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(693, 491);
+            this.MaximumSize = new System.Drawing.Size(918, 593);
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(693, 491);
+            this.MinimumSize = new System.Drawing.Size(918, 593);
             this.Name = "EditForm";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;

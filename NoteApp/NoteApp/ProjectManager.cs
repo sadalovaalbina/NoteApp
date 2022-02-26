@@ -15,7 +15,7 @@ namespace NoteApp
         /// </summary>
         public static readonly string FileName =
             Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)
-            + @"\NoteApp\NoteApp.notes";
+            + @"\NoteApp\NoteApp.txt";
 
         /// <summary>
         /// Сериализация (сохранение файла)
