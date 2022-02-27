@@ -1,0 +1,18 @@
+{
+  "Notes": [
+    {
+      "Name": "New",
+      "NoteCategory": 6,
+      "NoteText": "Text",
+      "CreateTime": "2021-04-18T08:13:16.470348+03:00",
+      "LastChange": "2021-04-18T08:13:16.470348+03:00"
+    },
+    {
+      "Name": "Older",
+      "NoteCategory": 5,
+      "NoteText": "Another text",
+      "CreateTime": "2021-04-18T08:13:16.4713462+03:00",
+      "LastChange": "2021-04-18T08:13:16.4713462+03:00"
+    }
+  ]
+}

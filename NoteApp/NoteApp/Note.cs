@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NoteApp
 {
@@ -135,13 +131,13 @@ namespace NoteApp
         /// <param name="noteText"> </param>
         /// <param name="createTime"> </param>
         /// <param name="lastChange"> </param>
-        private Note(string name, NoteCategory noteCategory, string noteText, DateTime createTime, DateTime lastChange)
+        public Note(string name, NoteCategory noteCategory, string noteText, DateTime createTime, DateTime lastChange)
         {
-            _name = name;
-            _noteCategory = noteCategory;
-            _noteText = noteText;
-            _createTime = createTime;
-            _lastChange = lastChange;
+            Name = name;
+            NoteCategory = noteCategory;
+            NoteText = noteText;
+            CreateTime = createTime;
+            LastChange = lastChange;
         }
 
         /// <summary>
@@ -169,6 +165,46 @@ namespace NoteApp
                    && _noteText == other._noteText
                    && _createTime.Equals(other._createTime)
                    && _lastChange.Equals(other._lastChange);
+        }
+
+        /// <summary>
+        /// Возвращает результат сравнения двух заметок
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+
+            if (ReferenceEquals(this, obj)) return true;
+
+            if (obj.GetType() != this.GetType()) return false;
+
+            return Equals((Note)obj);
+        }
+
+        /// <summary>
+        /// Возвращает некоторое числовое значение,
+        /// которое будет соответствовать данному объекту или его хэш-код
+        /// С помощью него можно сравнивать объекты
+        /// </summary>
+        /// <returns></returns>
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hashCode = (_name != null ? _name.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (int)_noteCategory;
+                hashCode = (hashCode * 397) ^ (_noteText!= null ? _noteText.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ _createTime.GetHashCode();
+                hashCode = (hashCode * 397) ^ _lastChange.GetHashCode();
+                return hashCode;
+            }
+        }
+
+        public string ToFormattedTime(DateTime time)
+        {
+            return time.ToShortDateString() + @" " + time.ToShortTimeString();
         }
     }
 }

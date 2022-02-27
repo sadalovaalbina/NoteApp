@@ -51,5 +51,17 @@ namespace NoteApp
             }
             return -1;
         }
+
+        /// <summary>
+        /// Возвращает отсортированный в порядке убывания
+        /// даты изменения заметки список
+        /// </summary>
+        /// <param name="notSortedList"></param>
+        /// <returns></returns>
+        public List<Note> SortByEdited(List<Note> notSortedList)
+        {
+            var sortedNotes = notSortedList.OrderByDescending(item => item.CreateTime).ToList();
+            return sortedNotes;
+        }
     }
 }
