@@ -71,7 +71,7 @@ namespace NoteAppUI
 
             if(error != "")
             {
-                MessageBox.Show("Warning", error, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(error, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 

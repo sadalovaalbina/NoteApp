@@ -16,6 +16,34 @@ namespace NoteApp
         /// </summary>
         public List<Note> Notes { get; set; } = new List<Note>();
 
+        public Note CurrentNote { get; set; }
+
+        /// <summary>
+        /// Возвращает отсортированный в порядке убывания
+        /// даты изменения заметки список
+        /// </summary>
+        /// <param name="notSortedList"></param>
+        /// <returns></returns>
+        public List<Note> SortByEdited(List<Note> notSortedList)
+        {
+            var sortedNotes = notSortedList.OrderByDescending(item => item.LastChange).ToList();
+            return sortedNotes;
+        }
+
+        /// <summary>
+        /// Возвращается отсортированный в порядке убывания
+        /// даты изменения заметки список определенной категории
+        /// </summary>
+        /// <param name="notSortedList"></param>
+        /// <param name="category"></param>
+        /// <returns></returns>
+        public List<Note> SortByEditedAndCategory(List<Note> notSortedList, NoteCategory category)
+        {
+            var sortedNotesCategory = notSortedList.Where(item => item.NoteCategory == category).ToList();
+            var sortedNotes = sortedNotesCategory.OrderByDescending(item => item.LastChange).ToList();
+            return sortedNotes;
+        }
+
         public Project SearchByCategory(string category, Project project)
         {
             if(category == "")
@@ -50,18 +78,6 @@ namespace NoteApp
                 }
             }
             return -1;
-        }
-
-        /// <summary>
-        /// Возвращает отсортированный в порядке убывания
-        /// даты изменения заметки список
-        /// </summary>
-        /// <param name="notSortedList"></param>
-        /// <returns></returns>
-        public List<Note> SortByEdited(List<Note> notSortedList)
-        {
-            var sortedNotes = notSortedList.OrderByDescending(item => item.CreateTime).ToList();
-            return sortedNotes;
         }
     }
 }

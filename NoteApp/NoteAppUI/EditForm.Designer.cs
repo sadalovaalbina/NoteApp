@@ -98,6 +98,8 @@ namespace NoteAppUI
             // 
             // textBoxTitle
             // 
+            this.textBoxTitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.textBoxTitle.Location = new System.Drawing.Point(112, 15);
             this.textBoxTitle.Margin = new System.Windows.Forms.Padding(4);
@@ -134,6 +136,7 @@ namespace NoteAppUI
             // 
             // buttonOk
             // 
+            this.buttonOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonOk.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.buttonOk.Location = new System.Drawing.Point(675, 501);
             this.buttonOk.Margin = new System.Windows.Forms.Padding(4);
@@ -146,6 +149,7 @@ namespace NoteAppUI
             // 
             // buttonCancel
             // 
+            this.buttonCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.buttonCancel.Location = new System.Drawing.Point(784, 501);
             this.buttonCancel.Margin = new System.Windows.Forms.Padding(4);
@@ -215,10 +219,7 @@ namespace NoteAppUI
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(918, 593);
-            this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(918, 593);
+            this.MaximumSize = new System.Drawing.Size(10000, 10000);
             this.Name = "EditForm";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;

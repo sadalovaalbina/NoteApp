@@ -15,6 +15,12 @@ namespace NoteAppUI
 
         private void Init(Note note)
         {
+            if (note.NoteText == null)
+            {
+                return;
+            }
+            _project.CurrentNote = note;
+            ProjectManager.SaveToFile(_project, ProjectManager.FileName);
             labelName.Text = note.Name;
             labelCategory.Text = _category + note.NoteCategory.ToString();
             textBox.Text = note.NoteText;
@@ -40,19 +46,24 @@ namespace NoteAppUI
         public MainForm()
         {
             InitializeComponent();
+            comboBox.SelectedIndex = 7;
             _project = ProjectManager.LoadFromFile(ProjectManager.FileName);
+            _project.Notes = _project.SortByEdited(_project.Notes);
             _realProject = _project;
             ShowInListBox(_realProject);
-            comboBox.Text = "All";
+            int index = _realProject.IndexOf(_project.CurrentNote, _project.Notes);
+            listBox.SelectedIndex = index;
         }
 
         void ClearMainForm()
         {
+            _project.CurrentNote = new Note();
+            ProjectManager.SaveToFile(_project, ProjectManager.FileName);
             labelName.Text = "Без названия";
             labelCategory.Text = _category;
             dateTimePickerCreated.Value = DateTime.Now;
             dateTimePickerModified.Value = DateTime.Now;
-            comboBox.Text = "All";
+            textBox.Text = "";
         }
 
         public void ComboBoxTextChanged()
@@ -68,7 +79,6 @@ namespace NoteAppUI
             }
             _realProject = _project;
             ShowInListBox(_realProject);
-            ClearMainForm();
         }
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
@@ -85,17 +95,21 @@ namespace NoteAppUI
                 return;
             }
             _project.Notes.Add(addForm.Note);
+            _project.Notes = _project.SortByEdited(_project.Notes);
             ProjectManager.SaveToFile(_project, ProjectManager.FileName);
+            _realProject = _project;
             comboBox.Text = "All";
             ComboBoxTextChanged();
-            listBox.SelectedIndex = _realProject.Notes.Count() - 1;
+            ClearMainForm();
+            Init(_realProject.Notes[0]);
+            listBox.SelectedIndex = 0;
         }
 
         private void editNoteToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if(listBox.SelectedIndex == -1)
             {
-                MessageBox.Show("Warning", "Select note", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Select note", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
             var index  = _project.IndexOf(_realProject.Notes[listBox.SelectedIndex], _project.Notes);
@@ -106,25 +120,32 @@ namespace NoteAppUI
                 return;
             }
             _project.Notes[index] = addForm.Note;
+            _project.Notes = _project.SortByEdited(_project.Notes);
             ProjectManager.SaveToFile(_project, ProjectManager.FileName);
+            _realProject = _project;
             comboBox.Text = "All";
             ComboBoxTextChanged();
-            Init(_realProject.Notes[index]);
-            listBox.SelectedIndex = -1;
+            ClearMainForm();
+            index = _realProject.IndexOf(addForm.Note, _realProject.Notes);
+            Init(_realProject.Notes[0]);
+            listBox.SelectedIndex = 0;
         }
 
         private void removeNoteToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (listBox.SelectedIndex == -1)
             {
-                MessageBox.Show("Warning", "Select note", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Select note", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
             var index = _project.IndexOf(_realProject.Notes[listBox.SelectedIndex], _project.Notes);
             _project.Notes.RemoveAt(index);
             ProjectManager.SaveToFile(_project, ProjectManager.FileName);
+            _realProject = _project;
             comboBox.Text = "";
             ComboBoxTextChanged();
+            ClearMainForm();
+            ShowInListBox(_realProject);
             listBox.SelectedIndex = -1;
         }
 
@@ -166,6 +187,7 @@ namespace NoteAppUI
         private void comboBox_TextChanged(object sender, EventArgs e)
         {
             ComboBoxTextChanged();
+            ClearMainForm();
         }
     }
 }

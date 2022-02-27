@@ -93,6 +93,7 @@ namespace NoteAppUI
             this.comboBox.Name = "comboBox";
             this.comboBox.Size = new System.Drawing.Size(160, 24);
             this.comboBox.TabIndex = 6;
+            this.comboBox.Text = "All";
             this.comboBox.SelectedValueChanged += new System.EventHandler(this.SelectedValueInComboBox);
             this.comboBox.TextChanged += new System.EventHandler(this.comboBox_TextChanged);
             // 
