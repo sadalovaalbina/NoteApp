@@ -58,7 +58,7 @@ namespace NoteApp
         {
             //Создается переменная, которая будет хранить
             //результат десериализации
-            Project project;
+            Project project = new Project();
 
             if (File.Exists(filename))
             {
@@ -76,11 +76,6 @@ namespace NoteApp
                             //преобразуется результат в целевой тип данных
                             project = serializer.Deserialize<Project>(textReader);
                         }
-
-                        if (project == null)
-                        {
-                            return new Project();
-                        }
                     }
                 }
                 catch
@@ -89,12 +84,6 @@ namespace NoteApp
                     //то возвращается новый проект
                     return new Project();
                 }
-            }
-            else
-            {
-                //Если файла не существует, 
-                //то возвращается новый проект
-                return new Project();
             }
 
             return project;

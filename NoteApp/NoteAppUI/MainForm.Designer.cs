@@ -79,15 +79,6 @@ namespace NoteAppUI
             this.comboBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.comboBox.FormattingEnabled = true;
             this.comboBox.ImeMode = System.Windows.Forms.ImeMode.Off;
-            this.comboBox.Items.AddRange(new object[] {
-            "Work",
-            "Home",
-            "HealthAndSport",
-            "People",
-            "Docs",
-            "Finance",
-            "Other",
-            "All"});
             this.comboBox.Location = new System.Drawing.Point(167, 42);
             this.comboBox.Margin = new System.Windows.Forms.Padding(4);
             this.comboBox.Name = "comboBox";

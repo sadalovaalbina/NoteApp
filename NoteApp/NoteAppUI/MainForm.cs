@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Windows.Forms;
+using System.Collections.Generic;
 using NoteApp;
 
 namespace NoteAppUI
@@ -9,7 +10,7 @@ namespace NoteAppUI
     {
         private Project _project = new Project();
 
-        private Project _realProject = new Project();
+        private List<Note> _noteList;
 
         private readonly string _category = "Category: ";
 
@@ -28,30 +29,40 @@ namespace NoteAppUI
             dateTimePickerModified.Value = note.LastChange;
         }
 
-        private void ShowInListBox(Project project)
+        private void ShowInListBox(List<Note> list)
         {
             listBox.Items.Clear();
 
-            if(project == null)
+            if(list == null)
             {
                 return;
             }
 
-            for(int index = 0; index < project.Notes.Count(); index++)
+            for(int index = 0; index < list.Count(); index++)
             {
-                listBox.Items.Add(project.Notes[index].Name);
+                listBox.Items.Add(list[index].Name);
             }
         }
 
         public MainForm()
         {
             InitializeComponent();
-            comboBox.SelectedIndex = 7;
+
+            comboBox.Items.Add("All");
+
+            var catigories = Enum.GetValues(typeof(NoteCategory));
+            
+            foreach(var category in catigories)
+            {
+                comboBox.Items.Add(category);
+            }
+
+            comboBox.SelectedIndex = 0;
             _project = ProjectManager.LoadFromFile(ProjectManager.FileName);
             _project.Notes = _project.SortByEdited(_project.Notes);
-            _realProject = _project;
-            ShowInListBox(_realProject);
-            int index = _realProject.IndexOf(_project.CurrentNote, _project.Notes);
+            _noteList = _project.Notes;
+            ShowInListBox(_noteList);
+            int index = _project.IndexOf(_project.CurrentNote, _noteList);
             listBox.SelectedIndex = index;
         }
 
@@ -77,8 +88,8 @@ namespace NoteAppUI
             {
                 return;
             }
-            _realProject = _project;
-            ShowInListBox(_realProject);
+            _noteList = _project.Notes;
+            ShowInListBox(_noteList);
         }
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
@@ -88,7 +99,7 @@ namespace NoteAppUI
 
         private void addNoteToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var addForm = new EditForm(new Note());
+            var addForm = new NoteForm(new Note());
             addForm.ShowDialog();
             if(addForm.DialogResult == DialogResult.Cancel)
             {
@@ -97,11 +108,11 @@ namespace NoteAppUI
             _project.Notes.Add(addForm.Note);
             _project.Notes = _project.SortByEdited(_project.Notes);
             ProjectManager.SaveToFile(_project, ProjectManager.FileName);
-            _realProject = _project;
+            _noteList = _project.Notes;
             comboBox.Text = "All";
             ComboBoxTextChanged();
             ClearMainForm();
-            Init(_realProject.Notes[0]);
+            Init(_noteList[0]);
             listBox.SelectedIndex = 0;
         }
 
@@ -112,8 +123,8 @@ namespace NoteAppUI
                 MessageBox.Show("Select note", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            var index  = _project.IndexOf(_realProject.Notes[listBox.SelectedIndex], _project.Notes);
-            var addForm = new EditForm(_project.Notes[index]);
+            var index  = _project.IndexOf(_noteList[listBox.SelectedIndex], _project.Notes);
+            var addForm = new NoteForm(_project.Notes[index]);
             addForm.ShowDialog();
             if(addForm.DialogResult == DialogResult.Cancel)
             {
@@ -122,12 +133,12 @@ namespace NoteAppUI
             _project.Notes[index] = addForm.Note;
             _project.Notes = _project.SortByEdited(_project.Notes);
             ProjectManager.SaveToFile(_project, ProjectManager.FileName);
-            _realProject = _project;
+            _noteList = _project.Notes;
             comboBox.Text = "All";
             ComboBoxTextChanged();
             ClearMainForm();
-            index = _realProject.IndexOf(addForm.Note, _realProject.Notes);
-            Init(_realProject.Notes[0]);
+            index = _project.IndexOf(addForm.Note, _noteList);
+            Init(_noteList[0]);
             listBox.SelectedIndex = 0;
         }
 
@@ -138,14 +149,14 @@ namespace NoteAppUI
                 MessageBox.Show("Select note", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            var index = _project.IndexOf(_realProject.Notes[listBox.SelectedIndex], _project.Notes);
+            var index = _project.IndexOf(_noteList[listBox.SelectedIndex], _project.Notes);
             _project.Notes.RemoveAt(index);
             ProjectManager.SaveToFile(_project, ProjectManager.FileName);
-            _realProject = _project;
+            _noteList = _project.Notes;
             comboBox.Text = "";
             ComboBoxTextChanged();
             ClearMainForm();
-            ShowInListBox(_realProject);
+            ShowInListBox(_noteList);
             listBox.SelectedIndex = -1;
         }
 
@@ -156,27 +167,27 @@ namespace NoteAppUI
             {
                 return;
             }
-            Init(_realProject.Notes[index]);
+            Init(_noteList[index]);
         }
 
         private void SelectedValueInComboBox(object sender, EventArgs e)
         {
-            if((comboBox.SelectedItem == null) || (comboBox.SelectedIndex == 7))
+            if((comboBox.SelectedItem == null) || (comboBox.SelectedIndex == 0))
             {
-                _realProject = _project;
-                ShowInListBox(_realProject);
+                _noteList = _project.Notes;
+                ShowInListBox(_noteList);
                 return;
             }
             var category = comboBox.SelectedItem.ToString();
-            _realProject = _project.SearchByCategory(category, _project);
+            _noteList = _project.SearchByCategory(category, _project).Notes;
             listBox.Items.Clear();
             ClearMainForm();
-            if(_realProject.Notes.Count() == 0)
+            if(_noteList.Count() == 0)
             {
                 return;
             }
 
-            ShowInListBox(_realProject);
+            ShowInListBox(_noteList);
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)

@@ -10,34 +10,19 @@ namespace NoteAppUnitTests
     public class ProjectManagerTest
     {
         /// <summary>
-        /// Путь к файлу, из которой загружается сборка
-        /// </summary>
-        private static readonly string LocalPath = Assembly.GetExecutingAssembly().Location;
-
-        /// <summary>
-        /// Переменная, хранящая папку, в которой лежит файл сборки
-        /// </summary>
-        private static readonly string PathDirectoryName = Path.GetDirectoryName(LocalPath);
-
-        /// <summary>
         /// Путь к правильному файлу
         /// </summary>
-        private readonly string _correctProjectFileName = PathDirectoryName + @"\TestData\correctProject.json";
+        private readonly string _correctProjectFileName = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + @"\TestData\correctProject.json";
 
         /// <summary>
         /// Путь к поврежденному файлу
         /// </summary>
-        private readonly string _corruptedProjectFileName = PathDirectoryName + @"\TestData\corruptedProject.json";
-
-        /// <summary>
-        /// Путь к папке для сохранения файла
-        /// </summary>
-        private static readonly string OutputFilePath = PathDirectoryName + @"\Output";
+        private readonly string _incorrectProjectFileName = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + @"\TestData\incorrectProject.json";
 
         /// <summary>
         /// Путь для сохранения файла
         /// </summary>
-        private readonly string _outputProjectFileName = OutputFilePath + @"\savedFile.json";
+        private readonly string _outputProjectFileName = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + @"\Output\savedFile.json";
 
 
         /// <summary>
@@ -49,8 +34,8 @@ namespace NoteAppUnitTests
             var correctProject = new Project();
 
             //Переменные хранящие время из эталонного файла
-            var firstTime = DateTime.Parse("2021-04-18T12:13:16.470348+07:00");
-            var secondTime = DateTime.Parse("2021-04-18T12:13:16.4713462+07:00");
+            var firstTime = DateTime.Parse("2022-03-18T12:13:16.470348+07:00");
+            var secondTime = DateTime.Parse("2022-03-18T12:13:16.4713462+07:00");
 
             correctProject.Notes.Add(new Note()
             {
@@ -75,18 +60,16 @@ namespace NoteAppUnitTests
         [Test(Description = "Позитивный тест сериализации проекта")]
         public void SaveToFile_SaveCorrectProject_ProjectSavedCorrectly()
         {
-            //Setup
             var savingProject = GetCorrectProject();
+            var path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + @"\Output";
 
-            if (File.Exists(OutputFilePath))
+            if (File.Exists(path))
             {
-                Directory.Delete(OutputFilePath, true);
+                Directory.Delete(path, true);
             }
 
-            //Act
             ProjectManager.SaveToFile(savingProject, _outputProjectFileName);
 
-            //Assert
             var actual = File.ReadAllText(_outputProjectFileName);
             var expected = File.ReadAllText(_correctProjectFileName);
 
@@ -96,13 +79,10 @@ namespace NoteAppUnitTests
         [Test(Description = "Позитивный тест десериализации проекта")]
         public void LoadFromFile_LoadCorrectProject_ProjectLoadedCorrectly()
         {
-            //Setup
             var expectedProject = GetCorrectProject();
 
-            //Act
             var actualProject = ProjectManager.LoadFromFile(_correctProjectFileName);
 
-            //Assert
             Assert.AreEqual(expectedProject.Notes.Count, actualProject.Notes.Count);
 
             Assert.Multiple(() =>
@@ -121,10 +101,8 @@ namespace NoteAppUnitTests
         [Test(Description = "Тест десериализации поврежденного файла")]
         public void LoadFromFile_LoadNotCorrectProject_ProjectLoadedNotCorrectly()
         {
-            //Act
-            var actualProject = ProjectManager.LoadFromFile(_corruptedProjectFileName);
+            var actualProject = ProjectManager.LoadFromFile(_incorrectProjectFileName);
 
-            //Assert
             Assert.AreEqual(actualProject.Notes.Count, 0);
             Assert.NotNull(actualProject);
         }
@@ -132,10 +110,8 @@ namespace NoteAppUnitTests
         [Test(Description = "Тест десериализации несуществующего файла")]
         public void LoadFromFile_LoadNonExistentProject_ProjectLoadedNotCorrectly()
         {
-            //Act
             var actualProject = ProjectManager.LoadFromFile(@"\TestData\Project.json");
 
-            //Assert
             Assert.AreEqual(actualProject.Notes.Count, 0);
             Assert.NotNull(actualProject);
         }

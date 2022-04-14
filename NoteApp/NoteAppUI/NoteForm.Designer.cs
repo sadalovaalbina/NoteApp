@@ -1,7 +1,7 @@
 ﻿
 namespace NoteAppUI
 {
-    partial class EditForm
+    partial class NoteForm
     {
         /// <summary>
         /// Required designer variable.
@@ -103,7 +103,7 @@ namespace NoteAppUI
             this.textBoxTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.textBoxTitle.Location = new System.Drawing.Point(112, 15);
             this.textBoxTitle.Margin = new System.Windows.Forms.Padding(4);
-            this.textBoxTitle.MaximumSize = new System.Drawing.Size(771, 25);
+            this.textBoxTitle.MaximumSize = new System.Drawing.Size(11111, 25);
             this.textBoxTitle.MinimumSize = new System.Drawing.Size(771, 25);
             this.textBoxTitle.Name = "textBoxTitle";
             this.textBoxTitle.Size = new System.Drawing.Size(771, 22);
@@ -179,16 +179,10 @@ namespace NoteAppUI
             // 
             this.comboBox.DataBindings.Add(new System.Windows.Forms.Binding("SelectedValue", this.noteBindingSource, "NoteCategory", true));
             this.comboBox.FormattingEnabled = true;
-            this.comboBox.Items.AddRange(new object[] {
-            "Work",
-            "Home",
-            "HealthAndSport",
-            "People",
-            "Docs",
-            "Finance",
-            "Other"});
             this.comboBox.Location = new System.Drawing.Point(112, 49);
             this.comboBox.Margin = new System.Windows.Forms.Padding(4);
+            this.comboBox.MaximumSize = new System.Drawing.Size(199, 0);
+            this.comboBox.MinimumSize = new System.Drawing.Size(199, 0);
             this.comboBox.Name = "comboBox";
             this.comboBox.Size = new System.Drawing.Size(199, 24);
             this.comboBox.TabIndex = 11;
@@ -202,7 +196,7 @@ namespace NoteAppUI
             // 
             this.projectManagerBindingSource.DataSource = typeof(NoteApp.ProjectManager);
             // 
-            // EditForm
+            // NoteForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -220,7 +214,8 @@ namespace NoteAppUI
             this.Controls.Add(this.label1);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.MaximumSize = new System.Drawing.Size(10000, 10000);
-            this.Name = "EditForm";
+            this.MinimumSize = new System.Drawing.Size(918, 593);
+            this.Name = "NoteForm";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.Text = "Add/Edit Note";

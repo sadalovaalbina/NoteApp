@@ -5,14 +5,28 @@ using NoteApp;
 
 namespace NoteAppUI
 {
-    public partial class EditForm : Form
+    public partial class NoteForm : Form
     {
+        private readonly Color errorColor = Color.Crimson;
+
+        private readonly Color whiteColor = Color.White;
+
         public Note Note { get; set; }
 
-        public EditForm(Note note)
+        public NoteForm(Note note)
         {
             Note = note;
             InitializeComponent();
+
+            comboBox.Items.Add("All");
+
+            var categories = Enum.GetValues(typeof(NoteCategory));
+            
+            foreach(var category in categories)
+            {
+                comboBox.Items.Add(category);
+            }
+
             if(Note == null)
             {
                 return;
@@ -28,18 +42,18 @@ namespace NoteAppUI
         {
             if(textBoxTitle.Text == "")
             {
-                textBoxText.BackColor = Color.White;
+                textBoxText.BackColor = whiteColor;
                 return;
             }
 
             try
             {
                 Note.Name = textBoxTitle.Text;
-                textBoxTitle.BackColor = Color.White;
+                textBoxTitle.BackColor = whiteColor;
             }
             catch(ArgumentException)
             {
-                textBoxTitle.BackColor = Color.Red;
+                textBoxTitle.BackColor = errorColor;
             }
         }
 
@@ -56,7 +70,7 @@ namespace NoteAppUI
         private void buttonOk_Click(object sender, EventArgs e)
         {
             string error = "";
-            if((Note.Name == "")||(textBoxTitle.BackColor == Color.Red))
+            if((Note.Name == "")||(textBoxTitle.BackColor == errorColor))
             {
                 error += "Wrong title\n";
             }
