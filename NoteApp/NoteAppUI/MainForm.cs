@@ -137,7 +137,6 @@ namespace NoteAppUI
             }
             _project.Notes.Add(addForm.Note);
             _project.Notes = _project.SortByEdited(_project.Notes);
-            _noteList = _project.Notes;
             comboBox.Text = _allCategories;
             ComboBoxCheckIndex();
             ClearMainForm();
@@ -161,7 +160,6 @@ namespace NoteAppUI
             }
             _project.Notes[index] = addForm.Note;
             _project.Notes = _project.SortByEdited(_project.Notes);
-            _noteList = _project.Notes;
             comboBox.Text = _allCategories;
             ComboBoxCheckIndex();
             ClearMainForm();
@@ -180,7 +178,6 @@ namespace NoteAppUI
             var index = _project.IndexOf(_noteList[listBox.SelectedIndex], _project.Notes);
             _project.Notes.RemoveAt(index);
             ProjectManager.SaveToFile(_project, ProjectManager.FileName);
-            _noteList = _project.Notes;
             comboBox.Text = "";
             ComboBoxCheckIndex();
             ClearMainForm();
