@@ -97,7 +97,6 @@ namespace NoteAppUI
         private void ClearMainForm()
         {
             _project.CurrentNote = new Note();
-            ProjectManager.SaveToFile(_project, ProjectManager.FileName);
             labelName.Text = "Без названия";
             labelCategory.Text = _category;
             dateTimePickerCreated.Value = DateTime.Now;
@@ -138,7 +137,6 @@ namespace NoteAppUI
             }
             _project.Notes.Add(addForm.Note);
             _project.Notes = _project.SortByEdited(_project.Notes);
-            ProjectManager.SaveToFile(_project, ProjectManager.FileName);
             _noteList = _project.Notes;
             comboBox.Text = _allCategories;
             ComboBoxCheckIndex();
@@ -163,7 +161,6 @@ namespace NoteAppUI
             }
             _project.Notes[index] = addForm.Note;
             _project.Notes = _project.SortByEdited(_project.Notes);
-            ProjectManager.SaveToFile(_project, ProjectManager.FileName);
             _noteList = _project.Notes;
             comboBox.Text = _allCategories;
             ComboBoxCheckIndex();
@@ -212,6 +209,7 @@ namespace NoteAppUI
             var category = comboBox.SelectedItem.ToString();
             _noteList = _project.SearchByCategory(category, _project).Notes;
             listBox.Items.Clear();
+            ProjectManager.SaveToFile(_project, ProjectManager.FileName);
             ClearMainForm();
             if(_noteList.Count() == 0)
             {
