@@ -7,18 +7,29 @@ namespace NoteAppUI
 {
     public partial class NoteForm : Form
     {
+        /// <summary>
+        /// цвет ошибки
+        /// </summary>
         private readonly Color errorColor = Color.Crimson;
 
+        /// <summary>
+        /// обычный цвет
+        /// </summary>
         private readonly Color whiteColor = Color.White;
 
+        /// <summary>
+        /// свойство заметки
+        /// </summary>
         public Note Note { get; set; }
 
+        /// <summary>
+        /// конструктор формы
+        /// </summary>
+        /// <param name="note"></param>
         public NoteForm(Note note)
         {
             Note = note;
             InitializeComponent();
-
-            comboBox.Items.Add("All");
 
             var categories = Enum.GetValues(typeof(NoteCategory));
             

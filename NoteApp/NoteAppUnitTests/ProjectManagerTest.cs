@@ -10,19 +10,24 @@ namespace NoteAppUnitTests
     public class ProjectManagerTest
     {
         /// <summary>
+        /// Путь до папки с примерами файлов
+        /// </summary>
+        private readonly static string _pathToDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+       
+        /// <summary>
         /// Путь к правильному файлу
         /// </summary>
-        private readonly string _correctProjectFileName = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + @"\TestData\correctProject.json";
+        private readonly string _correctProjectFileName = _pathToDirectory + @"\TestData\correctProject.json";
 
         /// <summary>
         /// Путь к поврежденному файлу
         /// </summary>
-        private readonly string _incorrectProjectFileName = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + @"\TestData\incorrectProject.json";
+        private readonly string _incorrectProjectFileName = _pathToDirectory + @"\TestData\incorrectProject.json";
 
         /// <summary>
         /// Путь для сохранения файла
         /// </summary>
-        private readonly string _outputProjectFileName = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + @"\Output\savedFile.json";
+        private readonly string _outputProjectFileName = _pathToDirectory + @"\Output\savedFile.json";
 
 
         /// <summary>
@@ -60,9 +65,11 @@ namespace NoteAppUnitTests
         [Test(Description = "Позитивный тест сериализации проекта")]
         public void SaveToFile_SaveCorrectProject_ProjectSavedCorrectly()
         {
+            //SetUp
             var savingProject = GetCorrectProject();
-            var path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + @"\Output";
+            var path = _pathToDirectory + @"\Output";
 
+            //Act
             if (File.Exists(path))
             {
                 Directory.Delete(path, true);
@@ -73,16 +80,20 @@ namespace NoteAppUnitTests
             var actual = File.ReadAllText(_outputProjectFileName);
             var expected = File.ReadAllText(_correctProjectFileName);
 
+            //Assert
             Assert.AreEqual(expected, actual);
         }
 
         [Test(Description = "Позитивный тест десериализации проекта")]
         public void LoadFromFile_LoadCorrectProject_ProjectLoadedCorrectly()
         {
+            //SetUp
             var expectedProject = GetCorrectProject();
 
+            //Act
             var actualProject = ProjectManager.LoadFromFile(_correctProjectFileName);
 
+            //Assert
             Assert.AreEqual(expectedProject.Notes.Count, actualProject.Notes.Count);
 
             Assert.Multiple(() =>
@@ -101,8 +112,10 @@ namespace NoteAppUnitTests
         [Test(Description = "Тест десериализации поврежденного файла")]
         public void LoadFromFile_LoadNotCorrectProject_ProjectLoadedNotCorrectly()
         {
+            //Act
             var actualProject = ProjectManager.LoadFromFile(_incorrectProjectFileName);
 
+            //Assert
             Assert.AreEqual(actualProject.Notes.Count, 0);
             Assert.NotNull(actualProject);
         }
@@ -110,8 +123,10 @@ namespace NoteAppUnitTests
         [Test(Description = "Тест десериализации несуществующего файла")]
         public void LoadFromFile_LoadNonExistentProject_ProjectLoadedNotCorrectly()
         {
+            //Act
             var actualProject = ProjectManager.LoadFromFile(@"\TestData\Project.json");
 
+            //Assert
             Assert.AreEqual(actualProject.Notes.Count, 0);
             Assert.NotNull(actualProject);
         }

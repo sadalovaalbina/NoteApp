@@ -8,12 +8,55 @@ namespace NoteAppUI
 {
     public partial class MainForm : Form
     {
+        /// <summary>
+        /// поле, хранящее проект
+        /// </summary>
         private Project _project = new Project();
 
+        /// <summary>
+        /// поле, хранящее список заметок
+        /// </summary>
         private List<Note> _noteList;
 
+        /// <summary>
+        /// поле, хранящее заголовок категорий
+        /// </summary>
         private readonly string _category = "Category: ";
 
+        /// <summary>
+        /// поле, хранящее строку "все категории"
+        /// </summary>
+        private readonly string _allCategories = "All";
+
+        /// <summary>
+        /// конструктор главной формы
+        /// </summary>
+        public MainForm()
+        {
+            InitializeComponent();
+
+            comboBox.Items.Add(_allCategories);
+
+            var catigories = Enum.GetValues(typeof(NoteCategory));
+
+            foreach (var category in catigories)
+            {
+                comboBox.Items.Add(category);
+            }
+
+            comboBox.SelectedIndex = 0;
+            _project = ProjectManager.LoadFromFile(ProjectManager.FileName);
+            _project.Notes = _project.SortByEdited(_project.Notes);
+            _noteList = _project.Notes;
+            ShowInListBox(_noteList);
+            int index = _project.IndexOf(_project.CurrentNote, _noteList);
+            listBox.SelectedIndex = index;
+        }
+
+        /// <summary>
+        /// инициализация главной формы
+        /// </summary>
+        /// <param name="note"></param>
         private void Init(Note note)
         {
             if (note.NoteText == null)
@@ -29,6 +72,10 @@ namespace NoteAppUI
             dateTimePickerModified.Value = note.LastChange;
         }
 
+        /// <summary>
+        /// отображения списка заметок
+        /// </summary>
+        /// <param name="list"></param>
         private void ShowInListBox(List<Note> list)
         {
             listBox.Items.Clear();
@@ -44,29 +91,10 @@ namespace NoteAppUI
             }
         }
 
-        public MainForm()
-        {
-            InitializeComponent();
-
-            comboBox.Items.Add("All");
-
-            var catigories = Enum.GetValues(typeof(NoteCategory));
-            
-            foreach(var category in catigories)
-            {
-                comboBox.Items.Add(category);
-            }
-
-            comboBox.SelectedIndex = 0;
-            _project = ProjectManager.LoadFromFile(ProjectManager.FileName);
-            _project.Notes = _project.SortByEdited(_project.Notes);
-            _noteList = _project.Notes;
-            ShowInListBox(_noteList);
-            int index = _project.IndexOf(_project.CurrentNote, _noteList);
-            listBox.SelectedIndex = index;
-        }
-
-        void ClearMainForm()
+        /// <summary>
+        /// отчистка главной формы
+        /// </summary>
+        private void ClearMainForm()
         {
             _project.CurrentNote = new Note();
             ProjectManager.SaveToFile(_project, ProjectManager.FileName);
@@ -77,14 +105,17 @@ namespace NoteAppUI
             textBox.Text = "";
         }
 
-        public void ComboBoxTextChanged()
+        /// <summary>
+        /// проверяет индекс combobox
+        /// </summary>
+        private void ComboBoxCheckIndex()
         {
             if (comboBox.SelectedIndex == -1)
             {
-                comboBox.Text = "All";
+                comboBox.Text = _allCategories;
             }
 
-            if (comboBox.Text != "All")
+            if (comboBox.Text != _allCategories)
             {
                 return;
             }
@@ -109,8 +140,8 @@ namespace NoteAppUI
             _project.Notes = _project.SortByEdited(_project.Notes);
             ProjectManager.SaveToFile(_project, ProjectManager.FileName);
             _noteList = _project.Notes;
-            comboBox.Text = "All";
-            ComboBoxTextChanged();
+            comboBox.Text = _allCategories;
+            ComboBoxCheckIndex();
             ClearMainForm();
             Init(_noteList[0]);
             listBox.SelectedIndex = 0;
@@ -134,8 +165,8 @@ namespace NoteAppUI
             _project.Notes = _project.SortByEdited(_project.Notes);
             ProjectManager.SaveToFile(_project, ProjectManager.FileName);
             _noteList = _project.Notes;
-            comboBox.Text = "All";
-            ComboBoxTextChanged();
+            comboBox.Text = _allCategories;
+            ComboBoxCheckIndex();
             ClearMainForm();
             index = _project.IndexOf(addForm.Note, _noteList);
             Init(_noteList[0]);
@@ -154,7 +185,7 @@ namespace NoteAppUI
             ProjectManager.SaveToFile(_project, ProjectManager.FileName);
             _noteList = _project.Notes;
             comboBox.Text = "";
-            ComboBoxTextChanged();
+            ComboBoxCheckIndex();
             ClearMainForm();
             ShowInListBox(_noteList);
             listBox.SelectedIndex = -1;
@@ -197,7 +228,7 @@ namespace NoteAppUI
 
         private void comboBox_TextChanged(object sender, EventArgs e)
         {
-            ComboBoxTextChanged();
+            ComboBoxCheckIndex();
             ClearMainForm();
         }
     }

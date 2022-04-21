@@ -53,32 +53,40 @@ namespace NoteAppUnitTests
         [Test(Description = "Проверка на добавление заметки в коллекцию")]
         public void Project_NotNull()
         {
+            //SetUp
             _notes.Notes.Add(_note);
 
+            //Assert
             Assert.NotNull(_notes);
         }
 
         [Test(Description = "Проверка сортировки")]
         public void Project_SortedByEdited()
         {
+            //SetUp
             var project = GetProject();
             var expected = project.Notes[0];
             var list = project.SortByEdited(project.Notes);
 
+            //Act
             var actual = list[1];
 
+            //Assert
             Assert.AreEqual(expected, actual);
         }
 
         [Test(Description = "Проверка возврата индекса")]
         public void Project_IndexOf()
         {
+            //SetUp
             var project = GetProject();
             var note = project.Notes[1];
             var expected = 1;
 
+            //Act
             var actual = project.IndexOf(note, project.Notes);
 
+            //Assert
             Assert.AreEqual(expected, actual);
         }
     }
